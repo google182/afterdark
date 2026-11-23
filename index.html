@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffffff">
+<title>AfterDark — Stories Worth Staying For</title>
+<meta name="description" content="AfterDark: entertainment, digital culture, relationships and lifestyle stories for adults.">
+
+<style>
+:root {
+  --purple:#8b3fc7;
+  --pink:#b34bd6;
+  --text:#21172a;
+  --muted:#716779;
+  --line:#e8e0ed;
+  --bg:#ffffff;
+  --soft:#f7f3fb;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Arial,sans-serif}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+.wrap{width:min(1160px,calc(100% - 32px));margin:auto}
+header{position:sticky;top:0;background:#ffffffed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:10}
+.nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{font-size:25px;font-weight:900;letter-spacing:-1px}
+.brand span{color:var(--pink)}
+.links{display:flex;gap:20px;color:var(--muted);font-size:14px}
+.search{width:165px;padding:9px 12px;border:1px solid var(--line);border-radius:10px}
+.menu{display:none;padding:8px;border:1px solid var(--line);background:white;border-radius:8px}
+.hero{padding:35px 0 20px}
+.heroBox{padding:55px 35px;border:1px solid #dfc9ec;border-radius:24px;background:linear-gradient(115deg,#fbf7ff,#f1e5fa);position:relative;overflow:hidden}
+.heroBox:after{content:"";position:absolute;width:300px;height:300px;right:5%;top:-80px;border-radius:50%;background:radial-gradient(circle,#c45aff66,transparent 70%)}
+.heroInner{position:relative;z-index:1;max-width:650px}
+.eyebrow{font-size:12px;font-weight:900;letter-spacing:2px;color:var(--purple);text-transform:uppercase}
+h1{font-size:clamp(38px,7vw,68px);line-height:1.05;letter-spacing:-2px;margin:12px 0}
+.hero p{color:var(--muted);max-width:550px}
+.btn{display:inline-block;border:0;border-radius:11px;padding:12px 18px;background:linear-gradient(100deg,var(--purple),var(--pink));color:white;font-weight:900;cursor:pointer}
+.adslot{margin:22px auto;border:1px dashed #cbb6d9;border-radius:12px;min-height:75px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#998ba2;background:#faf8fc;text-align:center;padding:12px}
+.adslot b{font-size:11px;letter-spacing:2px}
+.adslot small{font-size:12px}
+.section{padding:20px 0}
+.head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:17px}
+.head h2{margin:0;font-size:27px}
+.head p{margin:0;color:var(--muted);font-size:13px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.filter{border:1px solid var(--line);background:var(--soft);padding:8px 13px;border-radius:30px;cursor:pointer;color:var(--text);font-size:13px}
+.filter.active{background:#eadcf4;border-color:var(--purple)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.card{border:1px solid var(--line);border-radius:17px;overflow:hidden;background:white;box-shadow:0 5px 18px #2d14300a}
+.visual{height:190px;position:relative;overflow:hidden;background:#eee}
+.visual img{width:100%;height:100%;object-fit:cover;display:block}
+.visual:after{content:"";position:absolute;inset:45% 0 0;background:linear-gradient(transparent,#170d25a8)}
+.visual span{position:absolute;z-index:1;bottom:13px;left:13px;background:#21172acc;color:white;padding:5px 9px;border-radius:7px;font-size:11px;font-weight:bold;letter-spacing:1px}
+.body{padding:16px}
+.tag{font-size:11px;color:var(--purple);font-weight:900;text-transform:uppercase}
+.body h3{font-size:18px;line-height:1.3;margin:7px 0}
+.body p{color:var(--muted);font-size:14px;margin:0 0 10px}
+.meta{font-size:12px;color:#8b8191}
+.read{display:inline-block;color:var(--purple);font-weight:900;margin-top:10px;font-size:14px}
+.watch-more{display:block;text-align:center;margin:0 14px 15px;padding:13px;border-radius:11px;background:linear-gradient(100deg,var(--purple),var(--pink));color:white;font-weight:900;letter-spacing:1px}
+.empty{display:none;padding:20px;color:var(--muted)}
+.split{display:grid;grid-template-columns:1.4fr 1fr;gap:18px}
+.feature{padding:25px;border:1px solid var(--line);border-radius:17px;background:linear-gradient(135deg,#fbf8fd,#f3edf8)}
+.feature h3{font-size:25px;line-height:1.2}
+.feature p,.newsletter p{color:var(--muted)}
+.side{display:grid;gap:11px}
+.side a{padding:15px;border:1px solid var(--line);border-radius:13px}
+.side small{display:block;color:var(--muted)}
+.newsletter{margin:30px 0;padding:27px;border:1px solid #e8d8f1;border-radius:18px;background:linear-gradient(120deg,#fbf7ff,#f2eafa)}
+.bottom-cta-inner{padding:30px 20px;text-align:center;border:1px solid #e8d8f1;border-radius:20px;background:linear-gradient(135deg,#fbf7ff,#f2eafa)}
+.continue-button{display:block;max-width:520px;margin:15px auto 0;padding:17px;border-radius:14px;background:linear-gradient(100deg,var(--purple),var(--pink));color:white;font-weight:950;letter-spacing:1px}
+.article{display:none;padding:30px 0}
+.article.show{display:block}
+.articleBox{max-width:790px;margin:auto;border:1px solid var(--line);border-radius:18px;padding:28px}
+.articleBox h1{font-size:36px}
+.articleBox p{color:var(--muted)}
+.back{color:var(--purple);font-weight:bold}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:30px 0;color:var(--muted)}
+.foot{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.footlinks{display:flex;gap:16px;flex-wrap:wrap;font-size:13px}
+.disclaimer{font-size:12px;max-width:700px}
+dialog{border:1px solid #754092;border-radius:18px;background:white;color:var(--text);width:min(440px,calc(100% - 28px));padding:25px}
+dialog::backdrop{background:#21172a88;backdrop-filter:blur(5px)}
+@media(max-width:850px){
+ .grid{grid-template-columns:repeat(2,1fr)}
+ .links{display:none;position:absolute;top:70px;left:0;right:0;background:white;padding:18px;flex-direction:column}
+ .links.open{display:flex}
+ .menu{display:block}
+ .split{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+ .grid{grid-template-columns:1fr}
+ .heroBox{padding:35px 23px}
+ .head{align-items:start;flex-direction:column}
+ .search{width:125px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="wrap nav">
+<a class="brand" href="#" onclick="home()">After<span>Dark</span>.</a>
+<nav class="links" id="links">
+<a href="#latest">Latest</a>
+<a href="#entertainment">Entertainment</a>
+<a href="#culture">Digital Culture</a>
+<a href="#relationships">Relationships</a>
+<a href="#about">About</a>
+</nav>
+<div>
+<input class="search" id="search" placeholder="Search stories...">
+<button class="menu" onclick="document.getElementById('links').classList.toggle('open')">☰</button>
+</div>
+</div>
+</header>
+
+<main id="main">
+
+<section class="hero wrap">
+<div class="heroBox">
+<div class="heroInner">
+<div class="eyebrow">Adults only · 18+ editorial</div>
+<h1>Stories worth<br>staying for.</h1>
+<p>Entertainment, digital culture, relationships and lifestyle — all in one place.</p>
+<a class="btn" href="#latest">Explore Stories ↓</a>
+</div>
+</div>
+</section>
+
+<div class="wrap">
+<div class="adslot">
+<b>ADVERTISEMENT</b>
+<small>Advertisement placement</small>
+</div>
+</div>
+
+<section class="section wrap" id="latest">
+<div class="head">
+<div>
+<div class="eyebrow">Fresh from the desk</div>
+<h2>Latest Stories</h2>
+</div>
+<p>Explore something interesting.</p>
+</div>
+
+<div class="filters" id="filters">
+<button class="filter active" data-filter="all">All Stories</button>
+<button class="filter" data-filter="entertainment">Entertainment</button>
+<button class="filter" data-filter="culture">Digital Culture</button>
+<button class="filter" data-filter="relationships">Relationships</button>
+<button class="filter" data-filter="lifestyle">Lifestyle</button>
+</div>
+
+<div class="grid" id="storyGrid">
+
+<article class="card" data-category="entertainment">
+<div class="visual">
+<img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=700&q=75" alt="Fashion portrait" loading="lazy">
+<span>ENTERTAINMENT</span>
+</div>
+<div class="body">
+<div class="tag">Entertainment</div>
+<h3>What's Trending in Entertainment Right Now?</h3>
+<p>A look at the stories, creators and screen moments everyone is talking about.</p>
+<div class="meta">5 min read · Editor's pick</div>
+<a class="read" href="#" onclick="openArticle(0);return false">Read story →</a>
+</div>
+<a class="watch-more" href="https://auctionr.org/4/1c4222cd21914b028a28d046c27ae96d" target="_blank" rel="noopener noreferrer">WATCH MORE</a>
+</article>
+
+<article class="card" data-category="culture">
+<div class="visual">
+<img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=700&q=75" alt="Editorial portrait" loading="lazy">
+<span>DIGITAL CULTURE</span>
+</div>
+<div class="body">
+<div class="tag">Digital Culture</div>
+<h3>How Social Media Shapes Modern Culture</h3>
+<p>Exploring online trends, digital communities and the way we connect.</p>
+<div class="meta">4 min read · Culture</div>
+<a class="read" href="#" onclick="openArticle(1);return false">Read story →</a>
+</div>
+<a class="watch-more" href="https://auctionr.org/4/1c4222cd21914b028a28d046c27ae96d" target="_blank" rel="noopener noreferrer">WATCH MORE</a>
+</article>
+
+<article class="card" data-category="relationships">
+<div class="visual">
+<img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=700&q=75" alt="Lifestyle portrait" loading="lazy">
+<span>RELATIONSHIPS</span>
+</div>
+<div class="body">
+<div class="tag">Relationships</div>
+<h3>Building Better Connections in a Busy World</h3>
+<p>Small habits that can help make communication more meaningful.</p>
+<div class="meta">6 min read · Lifestyle</div>
+<a class="read" href="#" onclick="openArticle(2);return false">Read story →</a>
+</div>
+<a class="watch-more" href="https://auctionr.org/4/1c4222cd21914b028a28d046c27ae96d" target="_blank" rel="noopener noreferrer">WATCH MORE</a>
+</article>
+
+<article class="card" data-category="lifestyle">
+<div class="visual">
+<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=700&q=75" alt="Portrait" loading="lazy">
+<span>LIFESTYLE</span>
+</div>
+<div class="body">
+<div class="tag">Lifestyle</div>
+<h3>Everyday Ideas for a More Balanced Life</h3>
+<p>Fresh perspectives on routines, creativity and personal wellbeing.</p>
+<div class="meta">3 min read · Lifestyle</div>
+<a class="read" href="#" onclick="openArticle(3);return false">Read story →</a>
+</div>
+<a class="watch-more" href="https://auctionr.org/4/1c4222cd21914b028a28d046c27ae96d" target="_blank" rel="noopener noreferrer">WATCH MORE</a>
+</article>
+
+<article class="card" data-category="entertainment">
+<div class="visual">
+<img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=700&q=75" alt="Fashion portrait" loading="lazy">
+<span>STYLE & MEDIA</span>
+</div>
+<div class="body">
+<div class="tag">Entertainment</div>
+<h3>The Changing World of Digital Entertainment</h3>
+<p>How streaming and online platforms are changing what we watch.</p>
+<div class="meta">5 min read · Media</div>
+<a class="read" href="#" onclick="openArticle(4);return false">Read story →</a>
+</div>
+<a class="watch-more" href="https://auctionr.org/4/1c4222cd21914b028a28d046c27ae96d" target="_blank" rel="noopener noreferrer">WATCH MORE</a>
+</article>
+
+<article class="card" data-category="culture">
+<div class="visual">
+<img src="https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?w=700&q=75" alt="Creative portrait" loading="lazy">
+<span>INTERNET LIFE</span>
+</div>
+<div class="body">
+<div class="tag">Digital Culture</div>
+<h3>Creativity and Self-Expression Online</h3>
+<p>Discovering new ways people share ideas and express themselves.</p>
+<div class="meta">4 min read · Culture</div>
+<a class="read" href="#" onclick="openArticle(5);return false">Read story →</a>
+</div>
+<a class="watch-more" href="https://auctionr.org/4/1c4222cd21914b028a28d046c27ae96d" target="_blank" rel="noopener noreferrer">WATCH MORE</a>
+</article>
+
+</div>
+<div class="empty" id="empty">No stories found.</div>
+</section>
+
+<section class="section wrap" id="entertainment">
+<div class="head">
+<div><div class="eyebrow">Editor's selection</div><h2>Editor's Spotlight</h2></div>
+</div>
+<div class="split">
+<div class="feature">
+<div class="tag">Featured story</div>
+<h3>Finding Inspiration in the Digital Age</h3>
+<p>From online communities to creative platforms, discover how digital spaces are changing the way people learn, share and connect.</p>
+<a class="read" href="#" onclick="openArticle(6);return false">Explore the feature →</a>
+</div>
+<div class="side" id="culture">
+<a href="#" onclick="openArticle(7);return false"><b>Entertainment beyond the screen</b><small>How modern media keeps evolving</small></a>
+<a href="#" onclick="openArticle(8);return false"><b>Understanding online communities</b><small>Culture, creativity and connection</small></a>
+<a href="#" onclick="openArticle(9);return false"><b>Simple ways to refresh your routine</b><small>Everyday lifestyle inspiration</small></a>
+</div>
+</div>
+</section>
+
+<section class="section wrap" id="relationships">
+<div class="newsletter">
+<div class="eyebrow">Stay in the loop</div>
+<h2>More Stories. More Perspectives.</h2>
+<p>Explore fresh editorial stories and discover something interesting every visit.</p>
+<a class="btn" href="#latest">Browse All Stories</a>
+</div>
+</section>
+
+<div class="wrap">
+<div class="adslot"><b>ADVERTISEMENT</b><small>Advertisement placement</small></div>
+</div>
+
+<section class="section wrap">
+<div class="bottom-cta-inner">
+<div class="eyebrow">Continue Exploring</div>
+<h2>There's More to Discover.</h2>
+<p>Find another story and keep exploring AfterDark.</p>
+<a class="continue-button" href="https://auctionr.org/4/1c4222cd21914b028a28d046c27ae96d" target="_blank" rel="noopener noreferrer">CONTINUE</a>
+</div>
+</section>
+
+<section class="article" id="article">
+<div class="articleBox">
+<a href="#" class="back" onclick="home();return false">← Back to stories</a>
+<div class="eyebrow" id="articleTag">AFTERDARK EDITORIAL</div>
+<h1 id="articleTitle"></h1>
+<div class="meta">AfterDark · Editorial</div>
+<div id="articleContent"></div>
+<a class="btn" href="#latest" onclick="home()">Back to All Stories</a>
+</div>
+</section>
+
+</main>
+
+<footer id="about">
+<div class="wrap">
+<div class="foot">
+<a class="brand" href="#">After<span>Dark</span>.</a>
+<div class="footlinks">
+<a href="#" onclick="showPolicy('privacy');return false">Privacy Policy</a>
+<a href="#" onclick="showPolicy('terms');return false">Terms</a>
+<a href="#about">About</a>
+</div>
+</div>
+<p class="disclaimer">AfterDark is an independent editorial entertainment and lifestyle magazine for adults aged 18 and above. Content is provided for general informational and entertainment purposes.</p>
+<p class="meta">© <span id="year"></span> AfterDark. All rights reserved.</p>
+</div>
+</footer>
+
+<dialog id="ageGate">
+<div class="eyebrow">AGE RESTRICTION</div>
+<h2>Welcome to AfterDark</h2>
+<p>This website is intended for adults aged 18 and above. Please confirm that you are at least 18 years old to continue.</p>
+<button class="btn" onclick="confirmAge()">I AM 18 OR OLDER</button>
+<button class="btn" onclick="leaveSite()" style="background:#777">EXIT</button>
+</dialog>
+
+<dialog id="policy">
+<button class="btn" onclick="document.getElementById('policy').close()">Close</button>
+<div id="policyContent"></div>
+</dialog>
+
+<script>
+const smartlink="https://auctionr.org/4/1c4222cd21914b028a28d046c27ae96d";
+
+const stories=[
+["What's Trending in Entertainment Right Now?","Entertainment","Entertainment is always changing. New films, series, creators and online conversations give audiences fresh ways to discover stories. Explore the trends that are capturing attention and shaping what people watch next."],
+["How Social Media Shapes Modern Culture","Digital Culture","Social platforms have changed how people share ideas, follow trends and build communities. They make it easier to discover different perspectives and take part in conversations across the world."],
+["Building Better Connections in a Busy World","Relationships","Meaningful connections often begin with small habits: listening carefully, communicating openly and making time for people who matter. Consistent effort can help strengthen relationships."],
+["Everyday Ideas for a More Balanced Life","Lifestyle","A balanced routine can start with simple choices. Make room for rest, creativity, movement and the activities that help you feel refreshed."],
+["The Changing World of Digital Entertainment","Entertainment","Streaming services and digital platforms have transformed how audiences discover entertainment. Viewers now have more ways to explore content and find new favourites."],
+["Creativity and Self-Expression Online","Digital Culture","Online spaces give people new ways to express ideas, share creative projects and connect with communities that share their interests."],
+["Finding Inspiration in the Digital Age","Featured","Digital tools can open doors to learning, creativity and collaboration. The key is to use them thoughtfully and make space for real-world experiences too."],
+["Entertainment Beyond the Screen","Entertainment","Entertainment is no longer limited to television and cinema. Podcasts, live events and online communities continue to expand the ways audiences engage with stories."],
+["Understanding Online Communities","Culture","Online communities bring together people with shared interests. Respectful discussion and thoughtful participation help make these spaces more welcoming."],
+["Simple Ways to Refresh Your Routine","Lifestyle","Try a new hobby, take a break from screens, organize your space or spend time outdoors. Small changes can bring fresh energy to everyday life."]
+];
+
+function openArticle(i){
+ const s=stories[i];
+ if(!s)return;
+ document.getElementById("main").querySelectorAll("main > section:not(.article)").forEach(x=>x.style.display="none");
+ document.getElementById("articleTitle").textContent=s[0];
+ document.getElementById("articleTag").textContent=s[1];
+ document.getElementById("articleContent").innerHTML="<p>"+s[2]+"</p><p>Discover more stories and perspectives on AfterDark. Visit again for more entertainment, culture, relationships and lifestyle features.</p>";
+ document.getElementById("article").classList.add("show");
+ window.scrollTo(0,0);
+}
+function home(){
+ document.getElementById("article").classList.remove("show");
+ document.querySelectorAll("#main > section").forEach(x=>x.style.display="");
+ window.scrollTo(0,0);
+}
+function confirmAge(){
+ localStorage.setItem("afterdark18","yes");
+ document.getElementById("ageGate").close();
+}
+function leaveSite(){
+ window.location.href="https://www.google.com/";
+}
+function showPolicy(type){
+ const box=document.getElementById("policyContent");
+ if(type==="privacy"){
+  box.innerHTML="<h2>Privacy Policy</h2><p>This website may use standard analytics, cookies or advertising technologies. Third-party advertising providers may use cookies according to their own privacy policies. Do not submit sensitive personal information through this website.</p>";
+ }else{
+  box.innerHTML="<h2>Terms of Use</h2><p>AfterDark provides general editorial and entertainment content for adults aged 18 and above. Use the website lawfully and respectfully. Content may be updated without notice.</p>";
+ }
+ document.getElementById("policy").showModal();
+}
+
+document.getElementById("year").textContent=new Date().getFullYear();
+
+if(localStorage.getItem("afterdark18")!=="yes"){
+ document.getElementById("ageGate").showModal();
+}
+
+document.querySelectorAll(".filter").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+  document.querySelectorAll(".filter").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  filterStories();
+ });
+});
+
+document.getElementById("search").addEventListener("input",filterStories);
+
+function filterStories(){
+ const category=document.querySelector(".filter.active").dataset.filter;
+ 
